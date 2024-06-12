@@ -17,7 +17,7 @@ export class CustomerService {
     }
   }
 
-  async getUserStoreById(id: string) {
+  async getCustomerById(id: string) {
     try {
       return await this.prisma.customers.findUniqueOrThrow({
         where: {
@@ -26,6 +26,25 @@ export class CustomerService {
       });
     } catch {
       throw new NotFoundException('Cliente não encontrado');
+    }
+  }
+
+  async getMe(id: string) {
+    try {
+      await this.getCustomerById(id);
+
+      return await this.prisma.customers.findUnique({
+        where: {
+          id,
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      });
+    } catch (error) {
+      throw error;
     }
   }
 }
