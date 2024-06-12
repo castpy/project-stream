@@ -39,7 +39,7 @@ export class CustomerAuthGuard extends AuthGuard('jwt') {
     let customer: Customers;
 
     try {
-      customer = await this.customerService.getUserStoreById(id);
+      customer = await this.customerService.getCustomerById(id);
       request.user = customer;
     } catch (error) {
       throw new UnauthorizedException('Não autorizado');
