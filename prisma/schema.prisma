@@ -13,14 +13,47 @@ enum Roles {
 }
 
 model Customers {
-  id       String  @id @default(cuid())
-  role     Roles[] @default([CUSTOMER])
-  name     String
-  email    String  @unique
-  password String
+  id        String   @id @default(uuid())
+  role      Roles[]  @default([CUSTOMER])
+  avatar    String?
+  name      String
+  email     String   @unique
+  password  String
+  youtube   String?
+  twitter   String?
+  facebook  String?
+  instagram String?
+  Movies    Movies[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("customers")
+}
+
+model Movies {
+  id          String       @id @default(uuid())
+  image       String
+  title       String
+  description String
+  category    String[]
+  embed       String
+  customerId  String
+  customer    Customers    @relation(fields: [customerId], references: [id])
+  Highlights  Highlights[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("movies")
+}
+
+model Highlights {
+  id        String   @id @default(uuid())
+  movieId   String
+  movie     Movies   @relation(fields: [movieId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("highlights")
 }
