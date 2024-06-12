@@ -24,7 +24,7 @@ export default async function seed() {
           createMany: {
             data: [
               {
-                id: uuidv4(),
+                id: 'a4ddb5f1-d3b0-4885-944d-c7f98b9ea2c2',
                 image: 'https://i3.ytimg.com/vi/xlqhdaLhRVY/maxresdefault.jpg',
                 title: 'Dynamo - O mágico',
                 description:
@@ -36,7 +36,7 @@ export default async function seed() {
                 updatedAt: new Date(),
               },
               {
-                id: uuidv4(),
+                id: '8684afd6-788a-4ee8-bcd7-730413646309',
                 image: 'https://i3.ytimg.com/vi/cG9ZOLVw56Q/maxresdefault.jpg',
                 title: 'A volta de quem não foi - 1',
                 description:
@@ -48,7 +48,7 @@ export default async function seed() {
                 updatedAt: new Date(),
               },
               {
-                id: uuidv4(),
+                id: 'b6b48670-0e5a-4693-bc52-1ecaac1a58dc',
                 image: 'https://i3.ytimg.com/vi/HJ2nNvCRzW0/maxresdefault.jpg',
                 title: 'The Path',
                 description:

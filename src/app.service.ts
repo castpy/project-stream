@@ -34,4 +34,22 @@ export class AppService {
       throw error;
     }
   }
+
+  async getHighlights() {
+    try {
+      return await this.prisma.highlights.findMany({
+        select: {
+          movieId: true,
+          movie: {
+            select: {
+              title: true,
+              image: true,
+            },
+          },
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }

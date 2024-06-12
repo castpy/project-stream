@@ -12,8 +12,14 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Get('movie/highlights')
+  getHighlights() {
+    console.log('getHighlights');
+    return this.appService.getHighlights();
+  }
+
   @Get('movie/:id')
-  async getMovieById(@Param('id') id: string) {
-    return await this.appService.getMovieById(id);
+  getMovieById(@Param('id') id: string) {
+    return this.appService.getMovieById(id);
   }
 }
