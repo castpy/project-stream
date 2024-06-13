@@ -22,6 +22,11 @@ export class AppController {
     return this.appService.getHighlights();
   }
 
+  @Get('movie/embed/:id')
+  getMovieEmbed(@Param('id') id: string) {
+    return this.appService.getMovieEmbed(id);
+  }
+
   @Get('movie/:id')
   getMovieById(@Param('id') id: string) {
     return this.appService.getMovieById(id);

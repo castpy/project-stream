@@ -31,7 +31,7 @@ export default async function seed() {
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                 category: ['Magic', 'Realismo', 'Terror', 'Comédia'],
                 embed:
-                  '<iframe width="560" height="315" src="https://www.youtube.com/embed/xlqhdaLhRVY?si=bZdmUp3_6bQcVI2o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+                  'https://www.youtube.com/embed/xlqhdaLhRVY?si=bZdmUp3_6bQcVI2o',
                 createdAt: new Date(),
                 updatedAt: new Date(),
               },
@@ -43,7 +43,7 @@ export default async function seed() {
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                 category: ['Comédia', 'Realismo'],
                 embed:
-                  '<iframe width="560" height="315" src="https://www.youtube.com/embed/cG9ZOLVw56Q?si=ltr6pI35Q0YgHTcB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+                  'https://www.youtube.com/embed/cG9ZOLVw56Q?si=uXf6TLYYQYoNj5d0',
                 createdAt: new Date(),
                 updatedAt: new Date(),
               },
@@ -55,7 +55,7 @@ export default async function seed() {
                   'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                 category: ['Realismo', 'Terror'],
                 embed:
-                  '<iframe width="560" height="315" src="https://www.youtube.com/embed/xlqhdaLhRVY?si=bZdmUp3_6bQcVI2o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>',
+                  'https://www.youtube.com/embed/xlqhdaLhRVY?si=bZdmUp3_6bQcVI2o',
                 createdAt: new Date(),
                 updatedAt: new Date(),
               },
