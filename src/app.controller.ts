@@ -12,9 +12,13 @@ export class AppController {
     return this.appService.getHello();
   }
 
+  @Get('movies')
+  getMovies() {
+    return this.appService.getMovies();
+  }
+
   @Get('movie/highlights')
   getHighlights() {
-    console.log('getHighlights');
     return this.appService.getHighlights();
   }
 
