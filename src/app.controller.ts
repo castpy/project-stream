@@ -31,4 +31,9 @@ export class AppController {
   getMovieById(@Param('id') id: string) {
     return this.appService.getMovieById(id);
   }
+
+  @Get('user/:id')
+  getCustomerDetails(@Param('id') id: string) {
+    return this.appService.getCustomerDetails(id);
+  }
 }

@@ -1,6 +1,10 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from './prisma.service';
-import { List, Movies } from './types/get.movies.service';
+import groupByCategoryMovie from './utils/groupeByCategoryMovie.utils';
 
 @Injectable()
 export class AppService {
@@ -70,54 +74,7 @@ export class AppService {
         },
       });
 
-      const groupedMovies: { [key: string]: List[] } = {};
-
-      response.forEach((movie) => {
-        if (Array.isArray(movie.category)) {
-          movie.category.forEach((cat) => {
-            if (!groupedMovies[cat]) {
-              groupedMovies[cat] = [];
-            }
-            groupedMovies[cat].push({
-              id: movie.id,
-              image: movie.image,
-              title: movie.title,
-              customer: movie.customer,
-            });
-          });
-        } else {
-          const category = movie.category;
-          if (!groupedMovies[category]) {
-            groupedMovies[category] = [];
-          }
-          groupedMovies[category].push({
-            id: movie.id,
-            image: movie.image,
-            title: movie.title,
-            customer: movie.customer,
-          });
-        }
-      });
-
-      // Filtra categorias com mais de um filme
-      const filteredGroupedMovies = Object.keys(groupedMovies).reduce(
-        (acc, category) => {
-          if (groupedMovies[category].length > 1) {
-            acc[category] = groupedMovies[category];
-          }
-          return acc;
-        },
-        {},
-      );
-
-      const moviesArray: Movies[] = Object.keys(filteredGroupedMovies).map(
-        (category) => ({
-          category,
-          movies: filteredGroupedMovies[category],
-        }),
-      );
-
-      return moviesArray;
+      return await groupByCategoryMovie(response);
     } catch (error) {
       throw error;
     }
@@ -133,6 +90,54 @@ export class AppService {
           embed: true,
         },
       });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getCustomerDetails(id: string) {
+    try {
+      try {
+        const customer = await this.prisma.customers.findUniqueOrThrow({
+          where: {
+            id,
+          },
+          select: {
+            name: true,
+            avatar: true,
+            youtube: true,
+            twitter: true,
+            facebook: true,
+            instagram: true,
+          },
+        });
+
+        const customerMovies = await this.prisma.movies.findMany({
+          where: {
+            customerId: id,
+          },
+          select: {
+            id: true,
+            image: true,
+            title: true,
+            category: true,
+            customer: {
+              select: {
+                name: true,
+              },
+            },
+          },
+        });
+
+        const movies = await groupByCategoryMovie(customerMovies);
+
+        return {
+          customer,
+          movies,
+        };
+      } catch {
+        throw new NotFoundException('Customer not found');
+      }
     } catch (error) {
       throw error;
     }
